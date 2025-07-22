@@ -7,7 +7,7 @@ for line in open('reduced_requirements.txt'):
   requirements.append(req.strip())
 
 # follow https://stackoverflow.com/a/7071358/419116
-VERSIONFILE = "/_version.py"
+VERSIONFILE = "_version.py"
 verstrline = open(VERSIONFILE, "rt").read()
 VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
 mo = re.search(VSRE, verstrline, re.M)
