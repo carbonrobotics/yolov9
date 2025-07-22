@@ -5,8 +5,8 @@ import torch
 import yaml
 from tqdm import tqdm
 
-from . import TryExcept
-from .general import LOGGER, TQDM_BAR_FORMAT, colorstr
+import TryExcept
+from general import LOGGER, TQDM_BAR_FORMAT, colorstr
 
 PREFIX = colorstr('AutoAnchor: ')
 
