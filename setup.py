@@ -22,6 +22,13 @@ setup(
     version=verstr,
     description="YOLOv9: Learning What You Want to Learn Using Programmable Gradient Information",
     author="Carbon Robotics",
-    packages=find_packages(),
+    packages=["yolov9"] + ["yolov9." + pkg for pkg in find_packages()],
     install_requires=requirements,
+    python_requires=">=3.8",
+    include_package_data=True,
+    package_data={
+        "yolov9": ["*.yaml", "*.yml", "*.txt", "*.md", "*.jpg", "*.png", "*.py"],
+        "yolov9.data": ["*.yaml", "*.yml"],
+        "yolov9.models": ["**/*.yaml", "**/*.yml"],
+    },
 )
