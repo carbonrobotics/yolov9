@@ -30,8 +30,7 @@ import pkg_resources as pkg
 import torch
 import torchvision
 import yaml
-
-import TryExcept, emojis
+from yolov9.utils import TryExcept, emojis
 from yolov9.utils.downloads import gsutil_getsize
 from yolov9.utils.metrics import box_iou, fitness
 
