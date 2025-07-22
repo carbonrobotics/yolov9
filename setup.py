@@ -1,10 +1,11 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 import re
 
 requirements = []
 for line in open('reduced_requirements.txt'):
-  req = line.split('#', 1)[0]  # strip comments
-  requirements.append(req.strip())
+  req = line.split('#', 1)[0].strip()  # strip comments and whitespace
+  if req:  # only add non-empty requirements
+    requirements.append(req)
 
 # follow https://stackoverflow.com/a/7071358/419116
 VERSIONFILE = "_version.py"
@@ -16,6 +17,11 @@ if mo:
 else:
   raise RuntimeError("Unable to find version string in %s." % (VERSIONFILE,))
 
-setup(install_requires=requirements,
-      version=verstr,
-      )
+setup(
+    name="yolov9",
+    version=verstr,
+    description="YOLOv9: Learning What You Want to Learn Using Programmable Gradient Information",
+    author="Carbon Robotics",
+    packages=find_packages(),
+    install_requires=requirements,
+)
