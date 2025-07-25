@@ -710,6 +710,14 @@ class ClassificationModel(BaseModel):
         self.model = None
 
 
+class Upsample(nn.Module):
+    def __init__(self, size = None, scale_factor=None, method='nearest'):
+        super().__init__()
+        self.scale_factor = scale_factor
+    def forward(self, x):
+        shape = x.shape[2:]
+        return nn.functional.interpolate(x, size = [s*2 for s in shape])
+
 def parse_model(d, ch):  # model_dict, input_channels(3)
     # Parse a YOLO model.yaml dictionary
     LOGGER.info(f"\n{'':>3}{'from':>18}{'n':>3}{'params':>10}  {'module':<40}{'arguments':<30}")
@@ -766,6 +774,9 @@ def parse_model(d, ch):  # model_dict, input_channels(3)
             c2 = ch[f] * args[0] ** 2
         elif m is Expand:
             c2 = ch[f] // args[0] ** 2
+        elif m is nn.Upsample:
+            c2 = ch[f]
+            m = Upsample
         else:
             c2 = ch[f]
 
