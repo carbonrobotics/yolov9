@@ -168,7 +168,7 @@ class DualDetect(nn.Module):
             self.shape = shape
 
         box, cls = torch.cat([di.view(shape[0], self.no, -1) for di in d1], 2).split((self.reg_max * 4, self.nc), 1)
-        unsqueeze_anchors = torch.unqueeze(self.anchors, 0)
+        unsqueeze_anchors = torch.unsqueeze(self.anchors, 0)
         dbox = dist2bbox(self.dfl(box), unsqueeze_anchors, xywh=True, dim=1) * self.strides
         box2, cls2 = torch.cat([di.view(shape[0], self.no, -1) for di in d2], 2).split((self.reg_max * 4, self.nc), 1)
         dbox2 = dist2bbox(self.dfl2(box2), unsqueeze_anchors, xywh=True, dim=1) * self.strides
