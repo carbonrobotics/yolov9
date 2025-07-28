@@ -241,8 +241,8 @@ class DFL(nn.Module):
     def forward(self, x):
         b, c, a = x.shape  # batch, channels, anchors
 
-        conv = self.conv(x.view(b, 4, self.c1, a).transpose(2, 1))
-        conv_softmax = nn.functional.softmax(conv, dim=1)
+        conv = x.view(b, 4, self.c1, a).transpose(2, 1)
+        conv_softmax = self.conv(nn.functional.softmax(conv, dim=1))
         return conv_softmax.view(b, 4, a)
         # return self.conv(x.view(b, self.c1, 4, a).softmax(1)).view(b, 4, a)
 
