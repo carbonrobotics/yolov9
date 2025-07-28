@@ -718,7 +718,7 @@ class Upsample(nn.Module):
         self.method = method
     def forward(self, x):
         shape = x.shape[2:]
-        return nn.functional.interpolate(x, size = [s*2 for s in shape], method = self.method)
+        return nn.functional.interpolate(x, size = [s*2 for s in shape], mode = self.method)
 
 def parse_model(d, ch):  # model_dict, input_channels(3)
     # Parse a YOLO model.yaml dictionary
